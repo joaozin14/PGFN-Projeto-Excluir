@@ -96,5 +96,5 @@ while True:
 #---------------------------------------------------------------------------------------------------
 #Fecha a janela e encerra o script
 driver.quit()
-print('Processamento concluído e os processos foram excluídos!')
+print('\nProcessamento concluído e os processos foram excluídos!')
 #---------------------------------------------------------------------------------------------------
