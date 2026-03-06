@@ -60,13 +60,13 @@ sleep(3)
 #FORMA DE CARREGAR A PAGÍNA COMPLETAMENTE ATÉ O FINAL
 try:
     final_pagina = driver.find_element(By.ID, 'j_id215:j_id219:j_id236')
-    print("Final da página encontrado")
+    print("Final da página encontrado\n")
 
     total_processos_pagina = (final_pagina.text)[:1]
-    print(f"Total de processos para excluír: {total_processos_pagina}")
+    print(f"Total de processos para excluír: {total_processos_pagina}\n")
 
 except:
-    print("Erro ao achar o final da página!")
+    print("Erro ao achar o final da página!\n")
 
 sleep(3)
 #---------------------------------------------------------------------------------------------------
@@ -84,11 +84,11 @@ while True:
 
     pyautogui.press('enter')
 
-    print(f"Excluíndo o {total_processos_pagina} processo.")
+    print(f"Excluíndo o processo: {total_processos_pagina}.")
         
     
     if total_processos_pagina == 0:
-            print(f"Processos excluídos!.")
+            print(f"\nProcessos excluídos!.")
             break
 #---------------------------------------------------------------------------------------------------
 
@@ -96,5 +96,5 @@ while True:
 #---------------------------------------------------------------------------------------------------
 #Fecha a janela e encerra o script
 driver.quit()
-print('Processamento concluído e os processos foram excluídos.')
+print('Processamento concluído e os processos foram excluídos!')
 #---------------------------------------------------------------------------------------------------
