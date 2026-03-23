@@ -34,8 +34,8 @@ sleep(4)
 #Tentando fazer login no PJE
 try:
     # Identificando os IDs, inserindo as credenciais e entrando no PJE
-    login = driver.find_element(By.ID, 'username').send_keys('') # ALTERAR CPF AQUI
-    senha = driver.find_element(By.ID, 'password').send_keys('') # ALTERAR SENHA AQUI
+    login = driver.find_element(By.ID, 'username').send_keys('39918397845') # ALTERAR CPF AQUI
+    senha = driver.find_element(By.ID, 'password').send_keys('1003Jhms@@') # ALTERAR SENHA AQUI
     sleep(2)
     clic = driver.find_element(By.XPATH, '//*[@id="kc-login"]').click()
 
@@ -91,7 +91,8 @@ while True:
 
     sleep(2)
 
-    pyautogui.press('enter')
+    alerta = driver.switch_to.alert
+    alerta.accept()
 
     #Esperando aparecer a caixa de mensagem com a informação sobre o processo
     try:
