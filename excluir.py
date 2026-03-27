@@ -3,7 +3,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from time import sleep
-import pyautogui
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 #---------------------------------------------------------------------------------------------------
@@ -47,6 +46,7 @@ try:
 except:
     print("Falha no Login!\n")
     sleep(2)
+    driver.quit()
 #---------------------------------------------------------------------------------------------------
 
 #---------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ except:
 nova_url = "https://pje1g.trf3.jus.br/pje/Push/listView.seam"
 driver.get(nova_url)
 
-sleep(3)
+sleep(6)
 #---------------------------------------------------------------------------------------------------
 
 
@@ -64,11 +64,12 @@ try:
     final_pagina = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.ID, 'j_id215:j_id219:j_id236')))         
     print("Final da página encontrado\n")
 
-    total_processos_pagina = (final_pagina.text)[0:4]
+    total_processos_pagina = (final_pagina.text)[0:4] #Para um total de processos na página com 4 dígitos(PODE TROCAR PARA A QUANTIDADE DE DÍGITOS QUE QUISER)
     print(f"Total de processos para excluír: {total_processos_pagina}\n")
 
 except:
     print("Erro ao achar o final da página!")
+    driver.quit()
 
 sleep(3)
 #---------------------------------------------------------------------------------------------------
@@ -76,21 +77,22 @@ sleep(3)
 
 #---------------------------------------------------------------------------------------------------
 #Lógica principal, é o loop do while que possibilita a exclusão de todos os processos usando uma lógica simples
+contador = 1
 while True:
-    total_processos_pagina = int(total_processos_pagina) - 1
     sleep(4)
 
     try:
-        botao_excluir = driver.find_element(By.ID, f'j_id215:j_id219:{total_processos_pagina}:excluiProcessoButton')
+        botao_excluir = driver.find_element(By.ID, f'j_id215:j_id219:0:excluiProcessoButton')
         botao_excluir.click()
-        print("Botão de excluir encontrado!\n")
+        print("Botão de excluir encontrado!")
+        print(f"Excluindo o processo...")
 
     except:
         print("Botão de excluir não encontrado!")
-        break
 
     sleep(2)
 
+    #Clica na caixa de span que aparece
     alerta = driver.switch_to.alert
     alerta.accept()
 
@@ -98,14 +100,14 @@ while True:
     try:
         WebDriverWait(driver, 300).until(EC.visibility_of_element_located((By.ID, "dialogMessage")))
         sleep(3)
-        print(f"Excluido {total_processos_pagina} processo.\n")
+        print(f"Excluido {contador} processo!\n")
+        contador += 1
 
     except:
-        print(f"Não encontrado a caixa de mensagem!")
-        break        
+        print(f"Não encontrado a caixa de mensagem!")        
     
-    if total_processos_pagina == 0:
-            print(f"Processos excluídos!.\n")
+    if total_processos_pagina == 300:
+            print(f"300 Processos foram excluídos, caso precise excluir mais, rode o programa novamente.\n")
             break
 #---------------------------------------------------------------------------------------------------
 
