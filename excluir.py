@@ -106,7 +106,7 @@ while True:
     except:
         print(f"Não encontrado a caixa de mensagem!")        
     
-    if total_processos_pagina == 300:
+    if contador == 300:
             print(f"300 Processos foram excluídos, caso precise excluir mais, rode o programa novamente.\n")
             break
 #---------------------------------------------------------------------------------------------------
